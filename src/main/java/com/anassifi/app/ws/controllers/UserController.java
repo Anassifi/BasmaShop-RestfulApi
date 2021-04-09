@@ -1,6 +1,7 @@
 package com.anassifi.app.ws.controllers;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,11 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.anassifi.app.ws.requests.UserRequest;
 import com.anassifi.app.ws.responses.UserResponse;
+import com.anassifi.app.ws.services.UserService;
 import com.anassifi.app.ws.shared.dto.UserDto;
 
 @RestController
 @RequestMapping("/users") //localhost:8080/users
 public class UserController {
+	
+	@Autowired
+	UserService userService;
 	
 	//Http GET
 	@GetMapping
