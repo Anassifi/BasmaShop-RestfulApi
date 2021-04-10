@@ -2,6 +2,7 @@ package com.anassifi.app.ws.services.impl;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.anassifi.app.ws.entities.UserEntity;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	Utils utils;
@@ -32,8 +36,8 @@ public class UserServiceImpl implements UserService {
 
 		BeanUtils.copyProperties(user, userEntity);
 
-		// Adding default attributes
-		userEntity.setEncryptedPassword("encryptedPassword");
+		// Adding encrypted password and generated userID attributes
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userEntity.setUserId(utils.generateUserId(32));
 
 		// Saving a new user
