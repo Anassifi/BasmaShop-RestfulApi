@@ -8,27 +8,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "users")
-public class UserEntity implements Serializable{
+public class UserEntity implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6504301298280202106L;
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@Column(nullable = false)
 	private String userId;
-	
-	@Column(nullable = false, length=50)
+
+	@Column(nullable = false, length = 50)
 	private String firstName;
-	
-	@Column(nullable = false, length=50)
+
+	@Column(nullable = false, length = 50)
 	private String lastName;
 
-	@Column(nullable = false, length=120)
+	@Column(nullable = false, length = 120, unique = true)
 	private String email;
 
 	@Column(nullable = false)
@@ -39,7 +39,7 @@ public class UserEntity implements Serializable{
 
 	@Column(nullable = false)
 	private Boolean emailVerificationStatus = false;
-	
+
 	public long getId() {
 		return this.id;
 	}

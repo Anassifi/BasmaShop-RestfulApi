@@ -18,6 +18,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDto createUser(UserDto user) {
 
+		UserEntity checkUser = userRepository.findByEmail(user.getEmail());
+
+		if(checkUser != null) throw new RuntimeException("User Already exist!");
+
 		// New data layer instantiation
 		UserEntity userEntity = new UserEntity();
 
